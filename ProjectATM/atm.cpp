@@ -54,12 +54,35 @@ class ATM
 // setMobile function is Updating the user's mobile number
         void setMobile(string mobile_prev, string mobile_new)
         {
+            if(mobile_prev == mobile_no)
+            {
+                mobile_no = mobile_new;
+
+                cout << endl << "Successfully updated mobile number " ;
+                _getch();
+            }
+            else 
+            {
+                cout << endl << "Incorrect Old Mobile number!!! ";
+                _getch();
+            }
 
         }
 // cashWithdraw function is used to widthdraw money from ATM
-        void cashWithDraw(double balance)
+        void cashWithDraw(double amount_a)
         {
-
+            if (amount_a > 0 && amount_a < balance)
+            {
+                balance -= amount_a;
+                cout << endl << "Please Collect Your Cash ";
+                cout << endl << "Your Available Balance: " << balance;
+                _getch();
+            }
+            else 
+            {
+                cout << endl << "Invalid input or Insufficient balance";
+                _getch();
+            }
         }
 
         
@@ -113,30 +136,51 @@ int main()
 
                 switch (choice)                         // switch condition
                 {
-                case 1:                                 // if user presses 1
+                case 1: 
+                                                // if user presses 1
                     cout << endl << "Your Bank Balance is: " << user1.getBalance();
                     _getch();
                     break;
+
                 case 2:
-                
+                                                // if user presses 2
+                    cout << endl << "Enter the Amount ";
+                    cin >> amount;
+                    user1.cashWithDraw(amount);
                     break;
+
                 case 3:
-                
+                                                // If user presses 3
+                    cout << endl << " `````` User's Details Are `````` ";
+                    cout << endl << " -->> Account No " << user1.getAccountNo();
+                    cout << endl << " -->> Name " << user1.getName();
+                    cout << endl << " -->> Balance " << user1.getBalance();
+                    cout << endl << " -->> Mobile No " << user1.getMobileNo();
+                    _getch();
                     break;
+
                 case 4:
-                
+
+                                                //if user presses 4
+                    cout << endl << "Enter old mobile number " ;
+                    cin >> oldMobileNo;
+                    cout << endl << "Enter new mobile Number ";
+                    cin >> newMobileNo;
+                    user1.setMobile(oldMobileNo, newMobileNo);
                     break;
+
                 case 5:
+
+                    exit(0);
                 
                     break;
                 
                 default:
+
+                    cout << "Please enter valid choice!!! ";
                     break;
                 }
-
                 
-
-
             } while (1);
             
         }
